@@ -1,5 +1,6 @@
 package com.example.studyproject;
 
+import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
 
@@ -44,7 +45,7 @@ public class PhotozContoller {
 
     @GetMapping("/photoz/{id}")
     public Photo get(@PathVariable String id) {
-        Photo photo = db.get(id);
+        Photo photo = photoService.get(id);
 
         if(photo == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 
@@ -53,21 +54,17 @@ public class PhotozContoller {
 
     @DeleteMapping("/photoz/{id}")
     public void delete(@PathVariable String id) {
-        Photo photo = db.remove(id);
+        Photo photo = photoService.remove(id);
 
         if(photo == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 
     }
 
     @PostMapping("/photoz/")
-    public Photo create(@RequestPart("data") MultipartFile file) {
-        Photo photo= new Photo();
-       photo.setId(UUID.randomUUID().toString());
-       photo.setFileName(file.getOriginalFilename());
-       photo.setData(file.getBytes());
-       db.put(photo.getId(), photo);
+    public Photo create(@RequestPart("data") MultipartFile file) throws IOException {
+      
+      return photoService.save(file.getOriginalFilename(), file.getBytes());
         
-        return photo;
     }
     
 }
