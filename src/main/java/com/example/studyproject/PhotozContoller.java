@@ -60,8 +60,8 @@ public class PhotozContoller {
 
     }
 
-    @PostMapping("/photoz/")
-    public Photo create(@RequestPart("data") MultipartFile file) throws IOException {
+    @PostMapping("/photoz")
+    public Photo create(@RequestPart("data") MultipartFile file) throws IOException{
       
       return photoService.save(file.getOriginalFilename(), file.getBytes());
         

@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,8 +31,9 @@ public class DownloadController {
 
         byte[] data= photo.getData();
         HttpHeaders headers= new HttpHeaders();
+        headers.setContentType(MediaType.valueOf(photo.getContentType()));
 
-        
+
 
         return new ResponseEntity<>(data,headers,HttpStatus.OK);
     }
