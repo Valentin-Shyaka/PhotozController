@@ -1,4 +1,4 @@
-package com.example.studyproject;
+package com.example.studyproject.controller;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -20,6 +20,9 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
+
+import com.example.studyproject.model.Photo;
+import com.example.studyproject.services.PhotoService;
 
 
 
@@ -63,7 +66,7 @@ public class PhotozContoller {
     @PostMapping("/photoz")
     public Photo create(@RequestPart("data") MultipartFile file) throws IOException{
       
-      return photoService.save(file.getOriginalFilename(), file.getBytes());
+      return photoService.save(file.getOriginalFilename(), file.getBytes(),file.getContentType());
         
     }
     

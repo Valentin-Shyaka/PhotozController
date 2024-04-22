@@ -1,4 +1,4 @@
-package com.example.studyproject;
+package com.example.studyproject.model;
 
 import javax.validation.constraints.NotEmpty;
 

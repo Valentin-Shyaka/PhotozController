@@ -1,7 +1,12 @@
-package com.example.studyproject;
+package com.example.studyproject.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
+
+import com.example.studyproject.model.Photo;
+import com.example.studyproject.services.PhotoService;
+
+import org.springframework.http.ContentDisposition;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -32,6 +37,11 @@ public class DownloadController {
         byte[] data= photo.getData();
         HttpHeaders headers= new HttpHeaders();
         headers.setContentType(MediaType.valueOf(photo.getContentType()));
+        ContentDisposition build = ContentDisposition
+                .builder("attachment")
+                .filename(photo.getFileName())
+                .build();
+        headers.setContentDisposition(build);
 
 
 
